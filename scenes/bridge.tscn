@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://2qr5vvqc4q70"]
+
+[ext_resource type="Texture2D" uid="uid://cdsyntx2anhcx" path="res://assets/Tiles.png" id="1_7ct4w"]
+[ext_resource type="Script" uid="uid://b88mc145r5g4i" path="res://scenes/bridge.gd" id="1_im2sa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jyhfs"]
+atlas = ExtResource("1_7ct4w")
+region = Rect2(80, 80, 48, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tbgi4"]
+size = Vector2(48, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1q54l"]
+size = Vector2(48, 24)
+
+[node name="Bridge" type="RigidBody2D"]
+collision_layer = 2
+linear_damp = 5.0
+script = ExtResource("1_im2sa")
+basic_factor = 5.0
+velocity_factor = 0.5
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_jyhfs")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tbgi4")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_1q54l")

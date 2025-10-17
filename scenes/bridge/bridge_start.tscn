@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dout5j222w1fi"]
+
+[ext_resource type="Texture2D" uid="uid://cdsyntx2anhcx" path="res://assets/Tiles.png" id="1_r6tpf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vljgy"]
+atlas = ExtResource("1_r6tpf")
+region = Rect2(352, 240, 16, 32)
+
+[node name="BridgeStart" type="RigidBody2D"]
+freeze = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_vljgy")

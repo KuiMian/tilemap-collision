@@ -1,0 +1,84 @@
+[gd_scene load_steps=9 format=3 uid="uid://bb78jxmqoq70h"]
+
+[ext_resource type="PackedScene" uid="uid://ct25qor86ldmp" path="res://scenes/tiles_manager.tscn" id="1_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://db6usxgultdye" path="res://scenes/player.tscn" id="2_0wfyh"]
+[ext_resource type="Texture2D" uid="uid://cdsyntx2anhcx" path="res://assets/Tiles.png" id="3_sugp2"]
+[ext_resource type="Script" uid="uid://7q8236h454s6" path="res://scenes/slope.gd" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://bksq8to5b5sf" path="res://scenes/bridge/procedural_bridge.tscn" id="5_tbgi4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
+size = Vector2(48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tbgi4"]
+atlas = ExtResource("3_sugp2")
+region = Rect2(176, 238.1401, 48, 17.859894)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sugp2"]
+atlas = ExtResource("3_sugp2")
+region = Rect2(160, 336, 48, 32)
+
+[node name="Main" type="Node2D"]
+
+[node name="TilesManager" parent="." instance=ExtResource("1_0wfyh")]
+position = Vector2(95, 92)
+
+[node name="Player" parent="." instance=ExtResource("2_0wfyh")]
+position = Vector2(56, 16)
+collision_mask = 2
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(3, 3)
+metadata/_edit_lock_ = true
+
+[node name="Platform" type="StaticBody2D" parent="." groups=["fall_through_platforms"]]
+position = Vector2(104, 136)
+collision_layer = 2
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+shape = SubResource("RectangleShape2D_jyhfs")
+one_way_collision = true
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform"]
+texture = SubResource("AtlasTexture_tbgi4")
+metadata/_edit_lock_ = true
+
+[node name="Slope" type="StaticBody2D" parent="." groups=["fall_through_platforms"]]
+z_index = -1
+position = Vector2(0, 24)
+collision_layer = 2
+script = ExtResource("4_jyhfs")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Slope"]
+texture = SubResource("AtlasTexture_sugp2")
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Slope"]
+polygon = PackedVector2Array(-24, 8, 24, -16, 24, -8, -24, 16)
+one_way_collision = true
+metadata/_edit_lock_ = true
+
+[node name="RayCast2D" type="RayCast2D" parent="Slope"]
+position = Vector2(0, -8)
+target_position = Vector2(-24, 0)
+metadata/_edit_lock_ = true
+
+[node name="Slope2" type="StaticBody2D" parent="." groups=["fall_through_platforms"]]
+z_index = -1
+position = Vector2(48, 0)
+collision_layer = 2
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Slope2"]
+texture = SubResource("AtlasTexture_sugp2")
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Slope2"]
+polygon = PackedVector2Array(-24, 8, 24, -16, 24, -8, -24, 16)
+one_way_collision = true
+metadata/_edit_lock_ = true
+
+[node name="ProceduralBridge" parent="." instance=ExtResource("5_tbgi4")]
+position = Vector2(72, 32)

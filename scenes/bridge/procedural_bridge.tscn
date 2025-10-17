@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://bksq8to5b5sf"]
+
+[ext_resource type="PackedScene" uid="uid://tqluu64lqphx" path="res://scenes/bridge/bridge_middle.tscn" id="1_0llv6"]
+[ext_resource type="Script" uid="uid://c5jlmgm4ob86x" path="res://scenes/bridge/procedural_bridge.gd" id="1_b42oj"]
+[ext_resource type="PackedScene" uid="uid://dout5j222w1fi" path="res://scenes/bridge/bridge_start.tscn" id="2_b42oj"]
+[ext_resource type="PackedScene" uid="uid://70ysmamilagu" path="res://scenes/bridge/bridge_end.tscn" id="3_lcrb5"]
+
+[node name="ProceduralBridge" type="Node2D"]
+script = ExtResource("1_b42oj")
+
+[node name="BridgeMiddle" parent="." instance=ExtResource("1_0llv6")]
+position = Vector2(24, 0)
+
+[node name="BridgeStart" parent="." instance=ExtResource("2_b42oj")]
+
+[node name="BridgeEnd" parent="." instance=ExtResource("3_lcrb5")]
+position = Vector2(48, 0)
